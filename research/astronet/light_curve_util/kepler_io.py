@@ -123,7 +123,7 @@ def kepler_filenames(base_dir,
   quarters = sorted(quarters)  # Sort quarters chronologically.
 
   filenames = []
-  base_dir = os.path.join(base_dir, kep_id[0:4], kep_id)
+  base_dir = os.path.join(base_dir, kep_id[0:4], kep_id).replace("\\", "/")
   for quarter in quarters:
     for quarter_prefix in quarter_prefixes[quarter]:
       if injected_group:
@@ -133,7 +133,7 @@ def kepler_filenames(base_dir,
       else:
         base_name = "kplr%s-%s_%s.fits" % (kep_id, quarter_prefix,
                                            cadence_suffix)
-      filename = os.path.join(base_dir, base_name)
+      filename = os.path.join(base_dir, base_name).replace("\\", "/")
       # Not all stars have data for all quarters.
       if not check_existence or os.path.isfile(filename):
         filenames.append(filename)
